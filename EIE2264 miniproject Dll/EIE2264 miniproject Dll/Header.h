@@ -26,3 +26,12 @@ private:
 	int highscore;
 	int highscoremode;
 };
+
+class EngWord {
+public:
+	char* GetEngWord() {
+		return EngWord;
+	}
+private:
+	char EngWord[5];
+};

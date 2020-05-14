@@ -16,7 +16,7 @@ char* readfromtempfile() {
 char* readUserAnswer() {
 	char* str = new char;
 	ifstream filein("ans.txt", ios::beg);
-	filein.getline(str, 50);
+	filein.getline(str, 5);
 	ofstream clrfile("ans.txt", ios::trunc);
 	clrfile.close();
 	return str;
@@ -45,8 +45,9 @@ PlayerData* ReadPlayerData(int loc) {
 }
 
 int GetTotalNumberOfPlayer() {
-	ifstream filein("players.dat", ios::binary | ios::ate);
-	return filein.tellg() / sizeof(PlayerData) + 1;
+	ifstream filein("players.dat", ios::binary);
+	filein.seekg(0, ios::end);
+	return filein.tellg() / sizeof(PlayerData);
 }
 
 void CreateNewPlayer() {
@@ -64,14 +65,7 @@ int FindPlayerInList() {
 	{
 		player = ReadPlayerData(i);
 		bool match = true;
-		for (int i = 0; name[i] != 0; i++)
-		{
-			if (player->GetPlayerName()[i] != readfromtempfile()[i])
-			{
-				match = false;
-			}
-		}
-		if (match)
+		if (strcmp(player->GetPlayerName(), name) == 0)
 		{
 			return i;
 		}
@@ -99,13 +93,13 @@ int GetRandomNumber() {
 }
 
 int ChkChi() {
-	ifstream filein("Chi_Ans.txt", ios::beg);
+	ifstream filein("ChiDict.txt", ios::beg);
 	char* newChar = new char;
 	char* UserAns = readUserAnswer();
 	do
 	{
 		char* charin = newChar;
-		filein.getline(charin, 255);
+		filein.getline(charin, 5);
 		
 		if (strcmp(UserAns,charin) == 0) {
 			return 1;
@@ -113,6 +107,97 @@ int ChkChi() {
 
 	} while (!filein.eof());
 	return 0;
+}
+
+
+void WriteCountryToAns() {
+	ifstream filein("CountryDict.dat", ios::ate | ios::binary);
+	filein.seekg(GetRandomNumber() % (filein.tellg() / sizeof(EngWord)) * sizeof(EngWord));
+	EngWord* Eng = new EngWord;
+	filein.read(reinterpret_cast<char*>(Eng), sizeof(EngWord));
+	filein.close();
+	ofstream fileout("ans.txt", ios::trunc);
+	fileout << Eng->GetEngWord();
+	fileout.close();
+}
+
+void WriteEngToAns() {
+	ifstream filein("EngDict.dat", ios::ate | ios::binary);
+	filein.seekg(GetRandomNumber() % (filein.tellg() / sizeof(EngWord)) * sizeof(EngWord));
+	EngWord* Eng = new EngWord;
+	filein.read(reinterpret_cast<char*>(Eng), sizeof(EngWord));
+	filein.close();
+	ofstream fileout("ans.txt",ios::trunc);
+	fileout << Eng->GetEngWord();
+	fileout.close();
+}
+
+int ChkCountry() {
+	ifstream filein("CountryDict.dat", ios::beg | ios::binary);
+	char* UserAns = readUserAnswer();
+	char* newChar = new char;
+	EngWord* Eng = new EngWord;
+	for (int i = 0; i < 7186; i++)
+	{
+		filein.seekg(i * sizeof(EngWord));
+		filein.read(reinterpret_cast<char*>(Eng), sizeof(EngWord));
+		if (strcmp(Eng->GetEngWord(), UserAns) == 0)
+		{
+			return 1;
+		}
+	}
+	return 0;
+}
+
+int ChkEng() {
+	ifstream filein("EngDict.dat", ios::beg | ios::binary);
+	char* UserAns = readUserAnswer();
+	char* newChar = new char;
+	EngWord* Eng = new EngWord;
+	for (int i = 0; i < 7186; i++)
+	{
+		filein.seekg(i * sizeof(EngWord));
+		filein.read(reinterpret_cast<char*>(Eng), sizeof(EngWord));
+		if (strcmp(Eng->GetEngWord(),UserAns) == 0)
+		{
+			return 1;
+		}
+	}
+	return 0;
+}
+
+void Sort() {
+	PlayerData* temp = new PlayerData;
+	PlayerData* JPtr = new PlayerData;
+	int k = GetTotalNumberOfPlayer();
+
+	fstream file("players.dat", ios::binary | ios::in | ios::out);
+	for (int i = 1; i < k; i++)
+	{
+		file.seekg(i * sizeof(PlayerData));
+		file.read(reinterpret_cast<char*>(temp), sizeof(PlayerData));
+		file.seekg((i - 1) * sizeof(PlayerData));
+		file.read(reinterpret_cast<char*>(JPtr), sizeof(PlayerData));
+
+		for (int j = i - 1; j >= 0 && JPtr->GetHighscore() > temp->GetHighscore(); j--)
+		{
+			file.seekp((j + 1) * sizeof(PlayerData));
+			file.write(reinterpret_cast<char*>(JPtr), sizeof(PlayerData));
+			file.seekp(j * sizeof(PlayerData));
+			file.write(reinterpret_cast<char*>(temp), sizeof(PlayerData));
+			file.seekg((j - 1) * sizeof(PlayerData));
+			file.read(reinterpret_cast<char*>(JPtr), sizeof(PlayerData));
+		}
+	}
+	file.close();
+}
+
+int ScoreBoard(int RecordNum) {
+	PlayerData* player = ReadPlayerData(GetTotalNumberOfPlayer() - RecordNum);
+	ofstream fileout("ans.txt" , ios::trunc);
+	fileout << player->GetPlayerName();
+	fileout.close();
+	return player->GetHighscore();
 }
 
 extern "C"
@@ -132,4 +217,26 @@ extern "C"
 	__declspec(dllexport) int __stdcall dllChkChi() {
 		return ChkChi();
 	}
+	__declspec(dllexport) int __stdcall dllChkEng() {
+		return ChkEng();
+	}
+	__declspec(dllexport) void __stdcall dllWriteEngToAns() {
+		WriteEngToAns();
+	}
+	__declspec(dllexport) void __stdcall dllSort() {
+		Sort();
+	}
+	__declspec(dllexport) int __stdcall dllChkCountry() {
+		return ChkCountry();
+	}
+	__declspec(dllexport) void __stdcall dllWriteCountryToAns() {
+		WriteCountryToAns();
+	}
+	__declspec(dllexport) int __stdcall dllGetTotalNumberOfPlayer() {
+		return GetTotalNumberOfPlayer();
+	}
+	__declspec(dllexport) int __stdcall dllScoreBoard(int loc) {
+		return ScoreBoard(loc);
+	}
+	
 }
