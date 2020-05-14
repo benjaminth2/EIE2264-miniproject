@@ -1,0 +1,229 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9D94D22A-BBAB-4883-ADCC-6732F86E1FAE}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>EIE2264_miniproject_GUI</RootNamespace>
+    <AssemblyName>EIE2264 miniproject GUI</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="collection.cs" />
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form2.Designer.cs">
+      <DependentUpon>Form2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form3.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form3.Designer.cs">
+      <DependentUpon>Form3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form4.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form4.Designer.cs">
+      <DependentUpon>Form4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form5.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form5.Designer.cs">
+      <DependentUpon>Form5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form6.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form6.Designer.cs">
+      <DependentUpon>Form6.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form7.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form7.Designer.cs">
+      <DependentUpon>Form7.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form2.resx">
+      <DependentUpon>Form2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form3.resx">
+      <DependentUpon>Form3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form4.resx">
+      <DependentUpon>Form4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form5.resx">
+      <DependentUpon>Form5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form6.resx">
+      <DependentUpon>Form6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form7.resx">
+      <DependentUpon>Form7.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="EIE2264 miniproject Dll.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Eng Char\A.png" />
+    <Content Include="Eng Char\B.png" />
+    <Content Include="Eng Char\C.png" />
+    <Content Include="Eng Char\D.png" />
+    <Content Include="Eng Char\E.png" />
+    <Content Include="Eng Char\F.png" />
+    <Content Include="Eng Char\G.png" />
+    <Content Include="Eng Char\H.png" />
+    <Content Include="Eng Char\I.png" />
+    <Content Include="Eng Char\J.png" />
+    <Content Include="Eng Char\K.png" />
+    <Content Include="Eng Char\L.png" />
+    <Content Include="Eng Char\M.png" />
+    <Content Include="Eng Char\N.png" />
+    <Content Include="Eng Char\O.png" />
+    <Content Include="Eng Char\P.png" />
+    <Content Include="Eng Char\Q.png" />
+    <Content Include="Eng Char\R.png" />
+    <Content Include="Eng Char\S.png" />
+    <Content Include="Eng Char\T.png" />
+    <Content Include="Eng Char\U.png" />
+    <Content Include="Eng Char\V.png" />
+    <Content Include="Eng Char\W.png" />
+    <Content Include="Eng Char\X.png" />
+    <Content Include="Eng Char\Y.png" />
+    <Content Include="Eng Char\Z.png" />
+    <Content Include="Math Char\0.png" />
+    <Content Include="Math Char\1.png" />
+    <Content Include="Math Char\2.png" />
+    <Content Include="Math Char\3.png" />
+    <Content Include="Math Char\4.png" />
+    <Content Include="Math Char\5.png" />
+    <Content Include="Math Char\6.png" />
+    <Content Include="Math Char\7.png" />
+    <Content Include="Math Char\8.png" />
+    <Content Include="Math Char\9.png" />
+    <Content Include="Math Char\ADD.png" />
+    <Content Include="Math Char\DIV.png" />
+    <Content Include="Math Char\eq.png" />
+    <Content Include="Math Char\MUL.png" />
+    <Content Include="Math Char\SUB.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Chinese Char\之.png" />
+    <Content Include="Chinese Char\人.png" />
+    <Content Include="Chinese Char\利.png" />
+    <Content Include="Chinese Char\助.png" />
+    <Content Include="Chinese Char\勃.png" />
+    <Content Include="Chinese Char\安.png" />
+    <Content Include="Chinese Char\富.png" />
+    <Content Include="Chinese Char\尊.png" />
+    <Content Include="Chinese Char\工.png" />
+    <Content Include="Chinese Char\必.png" />
+    <Content Include="Chinese Char\愛.png" />
+    <Content Include="Chinese Char\抱.png" />
+    <Content Include="Chinese Char\拔.png" />
+    <Content Include="Chinese Char\擊.png" />
+    <Content Include="Chinese Char\斧.png" />
+    <Content Include="Chinese Char\暖.png" />
+    <Content Include="Chinese Char\杯.png" />
+    <Content Include="Chinese Char\柝.png" />
+    <Content Include="Chinese Char\榮.png" />
+    <Content Include="Chinese Char\水.png" />
+    <Content Include="Chinese Char\然.png" />
+    <Content Include="Chinese Char\物.png" />
+    <Content Include="Chinese Char\由.png" />
+    <Content Include="Chinese Char\白.png" />
+    <Content Include="Chinese Char\神.png" />
+    <Content Include="Chinese Char\色.png" />
+    <Content Include="Chinese Char\苗.png" />
+    <Content Include="Chinese Char\薪.png" />
+    <Content Include="Chinese Char\衣.png" />
+    <Content Include="Chinese Char\變.png" />
+    <Content Include="Chinese Char\路.png" />
+    <Content Include="Chinese Char\車.png" />
+    <Content Include="Chinese Char\過.png" />
+    <Content Include="Chinese Char\長.png" />
+    <Content Include="Chinese Char\關.png" />
+    <Content Include="Chinese Char\隙.png" />
+    <Content Include="Chinese Char\食.png" />
+    <Content Include="Chinese Char\飽.png" />
+    <Content Include="Chinese Char\駒.png" />
+    <Content Include="Chinese Char\鬼.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
