@@ -39,12 +39,9 @@ namespace EIE2264_miniproject_GUI
             {'M','N' ,'O' ,'P' },
             {'R','S' ,'T' ,'U' }
         };
-
-        Point[] CorrImgboxLocation = new Point[2];
-        Size[] CorrImgSize = new Size[2];
-        Bitmap[] CorrImg = new Bitmap[2];
+        
         PictureBox[] SpaceToFill = new PictureBox[2];
-        Point[,] OrgLoc = new Point[2, 4];
+        Point[] OrgLoc = new Point[4];
 
         PictureBox[] cheatpictureBoxes;
 
@@ -52,43 +49,27 @@ namespace EIE2264_miniproject_GUI
         {
             0,0,0,0,0,0,0,0,0,0
         };
-
-        int[,,] MaskForCurGame = new int[2, 4, 2]
-        {
-            {{-1,-1 },{-1, -1},{-1,-1 },{-1,-1 } },
-            {{-1,-1 },{-1, -1},{-1,-1 },{-1,-1 } }
-        };//row col RowInCharArrColInCharArr
+        
+        //row col RowInCharArrColInCharArr
 
         int TotalScore = 0;
         int CurScore = 0;
-        int CurRound = 0;
+        int CurRound = -1;
 
         void ResetAll()
         {
             timer1.Stop();
             CurScore = 0;
-            CorrImgboxLocation = new Point[2];
-            CorrImgSize = new Size[2];
-            CorrImg = new Bitmap[2];
             SpaceToFill = new PictureBox[2];
-            MaskForCurGame = new int[2, 4, 2]
-            {
-            {{-1,-1 },{-1, -1},{-1,-1 },{-1,-1 } },
-            {{-1,-1 },{-1, -1},{-1,-1 },{-1,-1 } }
-            };
-
-            r2c1.Enabled = true;
+            
             r2c1.Visible = true;
-            r2c1.Location = OrgLoc[1, 0];
-            r2c2.Enabled = true;
+            r2c1.Location = OrgLoc[0];
             r2c2.Visible = true;
-            r2c2.Location = OrgLoc[1, 1];
-            r2c3.Enabled = true;
+            r2c2.Location = OrgLoc[1];
             r2c3.Visible = true;
-            r2c3.Location = OrgLoc[1, 2];
-            r2c4.Enabled = true;
+            r2c3.Location = OrgLoc[2];
             r2c4.Visible = true;
-            r2c4.Location = OrgLoc[1, 3];
+            r2c4.Location = OrgLoc[3];
 
             r1c1.Image = null;
             r1c2.Image = null;
@@ -103,19 +84,32 @@ namespace EIE2264_miniproject_GUI
         void setquestion()
         {
             ResetAll();
-
-            int RandNum;
-            int RandNum2;
-            bool found = true;
+            CurRound++;
+            int RandNum, RandNum2;
+            bool Indicator;
+            int[,,] MaskForCurGame = new int[2, 4, 2]
+            {
+            {{-1,-1 },{-1, -1},{-1,-1 },{-1,-1 } },
+            {{-1,-1 },{-1, -1},{-1,-1 },{-1,-1 } }
+            };
+            PictureBox[,] pictureBoxes = new PictureBox[2, 4]
+            {
+                {r1c1,r1c2,r1c3,r1c4 },
+                {r2c1,r2c2,r2c3,r2c4 }
+            };
             do
             {
                 RandNum = collection.dllGetRandomNumber() % 10;
                 if (MaskForUsedQuestion[RandNum] == 0)
                 {
                     MaskForUsedQuestion[RandNum] = 5;
-                    found = false;
+                    Indicator = false;
                 }
-            } while (found);
+                else
+                {
+                    Indicator = true;
+                }
+            } while (Indicator);
             for (int i = 0; i < 10; i++)
             {
                 if (MaskForUsedQuestion[i] > 0)
@@ -129,7 +123,7 @@ namespace EIE2264_miniproject_GUI
                 MaskForCurGame[0, i, 1] = i;
             }
             RandNum = collection.dllGetRandomNumber() % 4;
-            RandNum2 = collection.dllGetRandomNumber() % 4;
+            RandNum2 = (collection.dllGetRandomNumber() % 11) % 4;
             if(RandNum2 == RandNum)
             {
                 RandNum2 = (RandNum2 + 1) % 4;
@@ -141,8 +135,6 @@ namespace EIE2264_miniproject_GUI
                 cheatpictureBoxes[RandNum2].Visible = true;
                 cheatpictureBoxes[RandNum2].Image = ChiChar[MaskForCurGame[0, RandNum2, 0], MaskForCurGame[0, RandNum2, 1]];
             }
-            CorrImg[0] = ChiChar[MaskForCurGame[0, RandNum, 0], MaskForCurGame[0, RandNum, 1]];
-            CorrImg[1] = ChiChar[MaskForCurGame[0, RandNum2, 0], MaskForCurGame[0, RandNum2, 1]];
             MaskForCurGame[1, 0, 0] = MaskForCurGame[0, RandNum, 0];
             MaskForCurGame[1, 0, 1] = MaskForCurGame[0, RandNum, 1];
             MaskForCurGame[1, 1, 0] = MaskForCurGame[0, RandNum2, 0];
@@ -179,111 +171,34 @@ namespace EIE2264_miniproject_GUI
                     MaskForCurGame[1, RandNum, 1] = tmp1;
                 }
             }
-            bool setFirst = false;
-            if(MaskForCurGame[0, 0, 0] != -1)
+
+            Indicator = false;
+            for(int i = 0;i < 2; i++)
             {
-                r1c1.Image = ChiChar[MaskForCurGame[0, 0, 0], MaskForCurGame[0, 0, 1]];
-                r1c1.Tag = CharToWrite[MaskForCurGame[0, 0, 0], MaskForCurGame[0, 0, 1]];
-                r1c1.BorderStyle = BorderStyle.None;
-            }
-            else
-            {
-                if (setFirst)
+                for(int j = 0;j < 4; j++)
                 {
-                    CorrImgboxLocation[1] = r1c1.Location;
-                    CorrImgSize[1] = r1c1.Size;
-                    SpaceToFill[1] = r1c1;
+                    if(MaskForCurGame[i,j,0] != -1)
+                    {
+                        pictureBoxes[i, j].Image = ChiChar[MaskForCurGame[i, j, 0], MaskForCurGame[i, j, 1]];
+                        pictureBoxes[i, j].Tag = CharToWrite[MaskForCurGame[i, j, 0], MaskForCurGame[i, j, 1]];
+                        pictureBoxes[i, j].BorderStyle = BorderStyle.None;
+                    }
+                    else
+                    {
+                        if (Indicator)
+                        {
+                            SpaceToFill[1] = pictureBoxes[i, j];
+                        }
+                        else
+                        {
+                            SpaceToFill[0] = pictureBoxes[i, j];
+                            Indicator = true;
+                        }
+                        pictureBoxes[i, j].BorderStyle = BorderStyle.FixedSingle;
+                        pictureBoxes[i, j].Tag = ' ';
+                    }
                 }
-                else
-                {
-                    CorrImgboxLocation[0] = r1c1.Location;
-                    CorrImgSize[0] = r1c1.Size;
-                    SpaceToFill[0] = r1c1;
-                    setFirst = true;
-                }
-                r1c1.BorderStyle = BorderStyle.FixedSingle;
-                r1c1.Tag = ' ';
             }
-            if (MaskForCurGame[0, 1, 0] != -1)
-            {
-                r1c2.Image = ChiChar[MaskForCurGame[0, 1, 0], MaskForCurGame[0, 1, 1]];
-                r1c2.Tag = CharToWrite[MaskForCurGame[0, 1, 0], MaskForCurGame[0, 1, 1]];
-                r1c2.BorderStyle = BorderStyle.None;
-            }
-            else
-            {
-                if (setFirst)
-                {
-                    CorrImgboxLocation[1] = r1c2.Location;
-                    CorrImgSize[1] = r1c2.Size;
-                    SpaceToFill[1] = r1c2;
-                }
-                else
-                {
-                    CorrImgboxLocation[0] = r1c2.Location;
-                    CorrImgSize[0] = r1c2.Size;
-                    SpaceToFill[0] = r1c2;
-                    setFirst = true;
-                }
-                r1c2.BorderStyle = BorderStyle.FixedSingle;
-                r1c2.Tag = ' ';
-            }
-            if (MaskForCurGame[0, 2, 0] != -1)
-            {
-                r1c3.Image = ChiChar[MaskForCurGame[0, 2, 0], MaskForCurGame[0, 2, 1]];
-                r1c3.Tag = CharToWrite[MaskForCurGame[0, 2, 0], MaskForCurGame[0, 2, 1]];
-                r1c3.BorderStyle = BorderStyle.None;
-            }
-            else
-            {
-                if (setFirst)
-                {
-                    CorrImgboxLocation[1] = r1c3.Location;
-                    CorrImgSize[1] = r1c3.Size;
-                    SpaceToFill[1] = r1c3;
-                }
-                else
-                {
-                    CorrImgboxLocation[0] = r1c3.Location;
-                    CorrImgSize[0] = r1c3.Size;
-                    SpaceToFill[0] = r1c3;
-                    setFirst = true;
-                }
-                r1c3.BorderStyle = BorderStyle.FixedSingle;
-                r1c3.Tag = ' ';
-            }
-            if (MaskForCurGame[0, 3, 0] != -1)
-            {
-                r1c4.Image = ChiChar[MaskForCurGame[0, 3, 0], MaskForCurGame[0, 3, 1]];
-                r1c4.Tag = CharToWrite[MaskForCurGame[0, 3, 0], MaskForCurGame[0, 3, 1]];
-                r1c4.BorderStyle = BorderStyle.None;
-            }
-            else
-            {
-                if (setFirst)
-                {
-                    CorrImgboxLocation[1] = r1c4.Location;
-                    CorrImgSize[1] = r1c4.Size;
-                    SpaceToFill[1] = r1c4;
-                }
-                else
-                {
-                    CorrImgboxLocation[0] = r1c4.Location;
-                    CorrImgSize[0] = r1c4.Size;
-                    SpaceToFill[0] = r1c4;
-                    setFirst = true;
-                }
-                r1c4.BorderStyle = BorderStyle.FixedSingle;
-                r1c4.Tag = ' ';
-            }
-            r2c1.Image = ChiChar[MaskForCurGame[1, 0, 0], MaskForCurGame[1, 0, 1]];
-            r2c1.Tag = CharToWrite[MaskForCurGame[1, 0, 0], MaskForCurGame[1, 0, 1]];
-            r2c2.Image = ChiChar[MaskForCurGame[1, 1, 0], MaskForCurGame[1, 1, 1]];
-            r2c2.Tag = CharToWrite[MaskForCurGame[1, 1, 0], MaskForCurGame[1, 1, 1]];
-            r2c3.Image = ChiChar[MaskForCurGame[1, 2, 0], MaskForCurGame[1, 2, 1]];
-            r2c3.Tag = CharToWrite[MaskForCurGame[1, 2, 0], MaskForCurGame[1, 2, 1]];
-            r2c4.Image = ChiChar[MaskForCurGame[1, 3, 0], MaskForCurGame[1, 3, 1]];
-            r2c4.Tag = CharToWrite[MaskForCurGame[1, 3, 0], MaskForCurGame[1, 3, 1]];
 
             if (mode != 2)
             {
@@ -297,22 +212,37 @@ namespace EIE2264_miniproject_GUI
             {
                 if (collection.WriteToAnsText(r1c1.Tag.ToString(), r1c2.Tag.ToString(), r1c3.Tag.ToString(), r1c4.Tag.ToString(),0) == 1)
                 {
-                    if(mode == 0)
+                    if (collection.settings[4, 1] == 0)
                     {
-                        TotalScore += 10;
+                        if (mode == 0)
+                        {
+                            TotalScore += collection.settings[4, 0];
+                        }
+                        if (mode == 1)
+                        {
+                            TotalScore += CurScore;
+                        }
+                        if (mode == 2)
+                        {
+                            setquestion();
+                        }
                     }
-                    if(mode == 1)
+                    else
                     {
-                        TotalScore += CurScore;
-                    }
-                    if(mode == 2)
-                    {
+                        if (mode == 0)
+                        {
+                            TotalScore += collection.settings[4, 0];
+                        }
+                        if (mode == 1)
+                        {
+                            TotalScore += CurScore;
+                        }
                         setquestion();
                     }
                 }
                 else
                 {
-                    if (mode == 0)
+                    if (mode == 0 && collection.settings[4, 1] == 0)
                     {
                         timer1.Stop();
                         MessageBox.Show("Total Score: " + TotalScore.ToString());
@@ -320,15 +250,14 @@ namespace EIE2264_miniproject_GUI
                         this.Close();
                     }
                 }
-                CurRound++;
-                if(CurRound == 3 && mode == 1)
+                if(CurRound + 1 == collection.settings[5, 0] && mode == 1)
                 {
                     timer1.Stop();
                     MessageBox.Show("Total Score: "+TotalScore.ToString());
                     collection.dllUpdateHighScore(TotalScore);
                     this.Close();
                 }
-                if (mode != 2)
+                if (mode != 2 && collection.settings[4, 1] == 0)
                 {
                     setquestion();
                 }
@@ -347,14 +276,10 @@ namespace EIE2264_miniproject_GUI
             Size = GetPreferredSize(Size);
             halfsize = new Size(r1c1.Size.Width / 2, r1c1.Size.Height / 2);
             timer1.Stop();
-            OrgLoc[0, 0] = r1c1.Location;
-            OrgLoc[0, 1] = r1c2.Location;
-            OrgLoc[0, 2] = r1c3.Location;
-            OrgLoc[0, 3] = r1c4.Location;
-            OrgLoc[1, 0] = r2c1.Location;
-            OrgLoc[1, 1] = r2c2.Location;
-            OrgLoc[1, 2] = r2c3.Location;
-            OrgLoc[1, 3] = r2c4.Location;
+            OrgLoc[0] = r2c1.Location;
+            OrgLoc[1] = r2c2.Location;
+            OrgLoc[2] = r2c3.Location;
+            OrgLoc[3] = r2c4.Location;
             cheatpictureBoxes = new PictureBox[4]
             {
                 r1c1_cheat,r1c2_cheat,r1c3_cheat,r1c4_cheat
@@ -372,12 +297,12 @@ namespace EIE2264_miniproject_GUI
         {
             for (int i = 0; i < 2; i++)
             {
-                if ((Picturebox.Location.X + halfsize.Width) >= CorrImgboxLocation[i].X &&
-    (Picturebox.Location.X + halfsize.Width) <= (CorrImgboxLocation[i].X + CorrImgSize[i].Width) &&
-    (Picturebox.Location.Y + halfsize.Height) >= CorrImgboxLocation[i].Y &&
-     (Picturebox.Location.Y + halfsize.Height) <= (CorrImgboxLocation[i].Y + CorrImgSize[i].Height))
+                if ((Picturebox.Location.X + halfsize.Width) >= SpaceToFill[i].Location.X &&
+    (Picturebox.Location.X + halfsize.Width) <= (SpaceToFill[i].Location.X + SpaceToFill[i].Width) &&
+    (Picturebox.Location.Y + halfsize.Height) >= SpaceToFill[i].Location.Y &&
+     (Picturebox.Location.Y + halfsize.Height) <= (SpaceToFill[i].Location.Y + SpaceToFill[i].Height))
                 {
-                    Picturebox.Location = CorrImgboxLocation[i];
+                    Picturebox.Location = SpaceToFill[i].Location;
                     SpaceToFill[i].Tag = Picturebox.Tag;
                     CheckCorrect();
                     return false;
@@ -404,7 +329,7 @@ namespace EIE2264_miniproject_GUI
             press = false;
             if (MouseUphandler(Picturebox))
             {
-                r2c4.Location = OrgLoc[1, 3];
+                r2c4.Location = OrgLoc[3];
             }
         }
 
@@ -427,7 +352,7 @@ namespace EIE2264_miniproject_GUI
             press = false;
             if (MouseUphandler(Picturebox))
             {
-                r2c3.Location = OrgLoc[1, 2];
+                r2c3.Location = OrgLoc[2];
             }
         }
 
@@ -450,7 +375,7 @@ namespace EIE2264_miniproject_GUI
             press = false;
             if (MouseUphandler(Picturebox))
             {
-                r2c2.Location = OrgLoc[1, 1];
+                r2c2.Location = OrgLoc[1];
             }
         }
 
@@ -474,7 +399,7 @@ namespace EIE2264_miniproject_GUI
             press = false;
             if (MouseUphandler(Picturebox))
             {
-                r2c1.Location = OrgLoc[1, 0];
+                r2c1.Location = OrgLoc[0];
             }
         }
 
@@ -484,28 +409,28 @@ namespace EIE2264_miniproject_GUI
             TimeDisplay.Text = "Time passed: " + CurScore.ToString();
             if (mode == 0)
             {
-                if (CurRound > 15 && CurScore > 2)
+                if (CurRound > collection.settings[0, 0] && CurScore > collection.settings[0, 1])
                 {
                     timer1.Stop();
                     MessageBox.Show("Total Score: " + TotalScore.ToString());
                     collection.dllUpdateHighScore(TotalScore);
                     this.Close();
                 }
-                if (CurRound > 10 && CurScore > 3)
+                if (CurRound > collection.settings[1, 0] && CurScore > collection.settings[1, 1])
                 {
                     timer1.Stop();
                     MessageBox.Show("Total Score: " + TotalScore.ToString());
                     collection.dllUpdateHighScore(TotalScore);
                     this.Close();
                 }
-                if(CurRound > 5&& CurScore > 4)
+                if (CurRound > collection.settings[2, 0] && CurScore > collection.settings[2, 1])
                 {
                     timer1.Stop();
                     MessageBox.Show("Total Score: " + TotalScore.ToString());
                     collection.dllUpdateHighScore(TotalScore);
                     this.Close();
                 }
-                if (CurRound > 0 && CurScore > 5)
+                if (CurRound > collection.settings[3, 0] && CurScore > collection.settings[3, 1])
                 {
                     timer1.Stop();
                     MessageBox.Show("Total Score: " + TotalScore.ToString());

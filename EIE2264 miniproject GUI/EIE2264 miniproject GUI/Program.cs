@@ -16,6 +16,7 @@ namespace EIE2264_miniproject_GUI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            collection.UpdateSettings();
             Form1 form1 = new Form1();
             Form2 form2 = new Form2();
             do

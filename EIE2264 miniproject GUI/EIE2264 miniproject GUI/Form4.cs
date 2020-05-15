@@ -30,7 +30,7 @@ namespace EIE2264_miniproject_GUI
         
         int TotalScore = 0;
         int CurScore = 0;
-        int CurRound = 0;
+        int CurRound = -1;
 
         void ResetAll()
         {
@@ -61,6 +61,8 @@ namespace EIE2264_miniproject_GUI
         void setquestion()
         {
             ResetAll();
+
+            CurRound++;
             int a = (collection.dllGetRandomNumber() % 9) + 1;
             int b;
             do
@@ -168,6 +170,10 @@ namespace EIE2264_miniproject_GUI
             }
             if (Ans.Tag.ToString() == "DIV")
             {
+                if(b == 0)
+                {
+                    return false;
+                }
                 if(a/b == c && a%b == 0)
                 {
                     return true;
@@ -196,22 +202,37 @@ namespace EIE2264_miniproject_GUI
             {
                 if (verifyans())
                 {
-                    if (mode == 0)
+                    if(collection.settings[4,1] == 0)
                     {
-                        TotalScore += 10;
+                        if (mode == 0)
+                        {
+                            TotalScore += collection.settings[4, 0];
+                        }
+                        if (mode == 1)
+                        {
+                            TotalScore += CurScore;
+                        }
+                        if (mode == 2)
+                        {
+                            setquestion();
+                        }
                     }
-                    if (mode == 1)
+                    else
                     {
-                        TotalScore += CurScore;
-                    }
-                    if (mode == 2)
-                    {
+                        if (mode == 0)
+                        {
+                            TotalScore += collection.settings[4, 0];
+                        }
+                        if (mode == 1)
+                        {
+                            TotalScore += CurScore;
+                        }
                         setquestion();
                     }
                 }
                 else
                 {
-                    if (mode == 0)
+                    if (mode == 0 && collection.settings[4, 1] == 0)
                     {
                         timer1.Stop();
                         MessageBox.Show("Total Score: " + TotalScore.ToString());
@@ -219,15 +240,14 @@ namespace EIE2264_miniproject_GUI
                         this.Close();
                     }
                 }
-                CurRound++;
-                if (CurRound == 3 && mode == 1)
+                if (CurRound + 1 == collection.settings[5,0] && mode == 1)
                 {
                     timer1.Stop();
                     MessageBox.Show("Total Score: " + TotalScore.ToString());
                     collection.dllUpdateHighScore(TotalScore);
                     this.Close();
                 }
-                if (mode != 2)
+                if (mode != 2 && collection.settings[4,1] == 0)
                 {
                     setquestion();
                 }
@@ -371,28 +391,28 @@ namespace EIE2264_miniproject_GUI
             TimeDisplay.Text = "Time passed: " + CurScore.ToString();
             if (mode == 0)
             {
-                if (CurRound > 15 && CurScore > 2)
+                if (CurRound > collection.settings[0, 0] && CurScore > collection.settings[0, 1])
                 {
                     timer1.Stop();
                     MessageBox.Show("Total Score: " + TotalScore.ToString());
                     collection.dllUpdateHighScore(TotalScore);
                     this.Close();
                 }
-                if (CurRound > 10 && CurScore > 3)
+                if (CurRound > collection.settings[1, 0] && CurScore > collection.settings[1, 1])
                 {
                     timer1.Stop();
                     MessageBox.Show("Total Score: " + TotalScore.ToString());
                     collection.dllUpdateHighScore(TotalScore);
                     this.Close();
                 }
-                if (CurRound > 5 && CurScore > 4)
+                if (CurRound > collection.settings[2, 0] && CurScore > collection.settings[2, 1])
                 {
                     timer1.Stop();
                     MessageBox.Show("Total Score: " + TotalScore.ToString());
                     collection.dllUpdateHighScore(TotalScore);
                     this.Close();
                 }
-                if (CurRound > 0 && CurScore > 5)
+                if (CurRound > collection.settings[3, 0] && CurScore > collection.settings[3, 1])
                 {
                     timer1.Stop();
                     MessageBox.Show("Total Score: " + TotalScore.ToString());

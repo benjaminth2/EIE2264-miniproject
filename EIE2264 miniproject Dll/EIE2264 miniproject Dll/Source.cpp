@@ -87,6 +87,12 @@ void UpdateHighScore(int Score) {
 	}
 }
 
+void EditHighScore(int Score) {
+	PlayerData* Player = ReadPlayerData(FindPlayerInList());
+	Player->SetHighScore(Score);
+	ModPlayerData(Player, FindPlayerInList());
+}
+
 int GetRandomNumber() {
 	srand(GetTickCount());
 	return rand();
@@ -200,6 +206,27 @@ int ScoreBoard(int RecordNum) {
 	return player->GetHighscore();
 }
 
+void editconfig(int a, int b, int c) {
+	ifstream filein("config.dat", ios::binary);
+	filein.seekg(0);
+	Config* cfg = new Config;
+	filein.read(reinterpret_cast<char*>(cfg), sizeof(Config));
+	filein.close();
+	cfg->SetConfig(a, b, c);
+	ofstream fileout("config.dat", ios::binary|ios::trunc);
+	fileout.seekp(0);
+	fileout.write(reinterpret_cast<char*>(cfg), sizeof(Config));
+	fileout.close();
+}
+
+int getconfig(int a, int b) {
+	ifstream filein("config.dat", ios::binary);
+	filein.seekg(0);
+	Config* cfg = new Config;
+	filein.read(reinterpret_cast<char*>(cfg), sizeof(Config));
+	filein.close();
+	return cfg->GetConfig(a, b);
+}
 extern "C"
 {
 	__declspec(dllexport) int __stdcall dllFindPlayerInList() {
@@ -210,6 +237,9 @@ extern "C"
 	}
 	__declspec(dllexport) void __stdcall dllUpdateHighScore(int score) {
 		UpdateHighScore(score);
+	}
+	__declspec(dllexport) void __stdcall dllEditHighScore(int score) {
+		EditHighScore(score);
 	}
 	__declspec(dllexport) int __stdcall dllGetRandomNumber() {
 		return GetRandomNumber();
@@ -237,6 +267,12 @@ extern "C"
 	}
 	__declspec(dllexport) int __stdcall dllScoreBoard(int loc) {
 		return ScoreBoard(loc);
+	}
+	__declspec(dllexport) void __stdcall dlleditconfig(int a,int b,int c) {
+		editconfig(a, b, c);
+	}
+	__declspec(dllexport) int __stdcall dllgetconfig(int a,int b) {
+		return getconfig(a,b);
 	}
 	
 }

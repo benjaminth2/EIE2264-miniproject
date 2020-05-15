@@ -143,5 +143,19 @@ namespace EIE2264_miniproject_GUI
             Form7 f7 = new Form7();
             f7.ShowDialog();
         }
+        
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            Form8 f8 = new Form8(cheatmode);
+            f8.ShowDialog();
+            for (int i = 0; i < 6; i++)
+            {
+                for(int j = 0; j < 2; j++)
+                {
+                    collection.dlleditconfig(i, j, collection.settings[i, j]);
+                }
+            }
+            MessageBox.Show("Setting saved!");
+        }
     }
 }

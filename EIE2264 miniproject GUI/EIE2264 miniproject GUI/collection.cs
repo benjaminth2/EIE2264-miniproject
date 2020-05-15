@@ -77,12 +77,26 @@ namespace EIE2264_miniproject_GUI
             return Text;
         }
 
+        public static int[,] settings = new int[6, 2];
+        public static void UpdateSettings()
+        {
+            for(int i = 0;i < 6; i++)
+            {
+                for(int j = 0; j < 2; j++)
+                {
+                    settings[i, j] = dllgetconfig(i, j);
+                }
+            }
+        }
+
         [DllImport("EIE2264 miniproject Dll.dll")]
         public static extern int dllFindPlayerInList();
         [DllImport("EIE2264 miniproject Dll.dll")]
         public static extern int dllHighScoreOfPlayer();
         [DllImport("EIE2264 miniproject Dll.dll")]
         public static extern void dllUpdateHighScore(int score);
+        [DllImport("EIE2264 miniproject Dll.dll")]
+        public static extern void dllEditHighScore(int score);
         [DllImport("EIE2264 miniproject Dll.dll")]
         public static extern int dllGetRandomNumber();
         [DllImport("EIE2264 miniproject Dll.dll")]
@@ -101,5 +115,9 @@ namespace EIE2264_miniproject_GUI
         public static extern int dllScoreBoard(int loc);
         [DllImport("EIE2264 miniproject Dll.dll")]
         public static extern void dllSort();
+        [DllImport("EIE2264 miniproject Dll.dll")]
+        public static extern void dlleditconfig(int a, int b, int c);
+        [DllImport("EIE2264 miniproject Dll.dll")]
+        public static extern int dllgetconfig(int a, int b);
     }
 }

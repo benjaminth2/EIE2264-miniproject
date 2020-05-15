@@ -216,6 +216,7 @@
             this.Controls.Add(this.r1c4);
             this.Controls.Add(this.r1c2);
             this.Controls.Add(this.r1c3);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
