@@ -113,12 +113,12 @@ namespace EIE2264_miniproject_GUI
                 a = temp;
             }
 
-            if(a > 10)
+            if(a > 9)
             {
                 a_10.Image = MathChar[a / 10];
                 a_10.Tag = a / 10;
             }
-            if (c > 10)
+            if (c > 9)
             {
                 c_10.Image = MathChar[c / 10];
                 c_10.Tag = c / 10;

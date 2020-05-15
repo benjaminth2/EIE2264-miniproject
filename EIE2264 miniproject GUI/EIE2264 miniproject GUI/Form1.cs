@@ -35,7 +35,7 @@ namespace EIE2264_miniproject_GUI
                 Form1Execute = true;
                 this.Close();
             }
-            MessageBox.Show("Please enter something!", "Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+            MessageBox.Show("Username cannot empty!", "Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
         }
     }
 }
