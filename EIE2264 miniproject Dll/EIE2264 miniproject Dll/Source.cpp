@@ -22,17 +22,24 @@ char* readUserAnswer() {
 	return str;
 }
 
+int GetTotalNumberOfPlayer() {
+	ifstream filein("players.dat", ios::binary);
+	filein.seekg(0, ios::end);
+	return (filein.tellg() / sizeof(PlayerData));
+}
+
 void AppPlayerData(PlayerData* ClassToWrite) {
-	ofstream fileout("players.dat", ios::app|ios::binary);
+	ofstream fileout("players.dat", ios::app | ios::binary);
+	fileout.seekp(GetTotalNumberOfPlayer() * sizeof(PlayerData));
 	fileout.write(reinterpret_cast<char*>(ClassToWrite), sizeof(PlayerData));
 	fileout.close();
 }
 
 void ModPlayerData(PlayerData* ClassToWrite,int loc) {
-	ofstream fileout("players.dat", ios::beg | ios::binary);
-	fileout.seekp(loc * sizeof(PlayerData));
-	fileout.write(reinterpret_cast<char*>(ClassToWrite), sizeof(PlayerData));
-	fileout.close();
+	fstream file("players.dat", ios::binary | ios::in | ios::out);
+	file.seekp(loc * sizeof(PlayerData),ios::beg);
+	file.write(reinterpret_cast<char*>(ClassToWrite), sizeof(PlayerData));
+	file.close();
 }
 
 PlayerData* ReadPlayerData(int loc) {
@@ -42,12 +49,6 @@ PlayerData* ReadPlayerData(int loc) {
 	filein.read(reinterpret_cast<char*>(Player), sizeof(PlayerData));
 	filein.close();
 	return Player;
-}
-
-int GetTotalNumberOfPlayer() {
-	ifstream filein("players.dat", ios::binary);
-	filein.seekg(0, ios::end);
-	return filein.tellg() / sizeof(PlayerData);
 }
 
 void CreateNewPlayer() {
