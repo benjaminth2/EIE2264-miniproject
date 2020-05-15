@@ -148,14 +148,18 @@ namespace EIE2264_miniproject_GUI
         {
             Form8 f8 = new Form8(cheatmode);
             f8.ShowDialog();
-            for (int i = 0; i < 6; i++)
+            if (changesetting)
             {
-                for(int j = 0; j < 2; j++)
+                for (int i = 0; i < 6; i++)
                 {
-                    collection.dlleditconfig(i, j, collection.settings[i, j]);
+                    for (int j = 0; j < 2; j++)
+                    {
+                        collection.dlleditconfig(i, j, collection.settings[i, j]);
+                    }
                 }
+                MessageBox.Show("Setting saved!");
             }
-            MessageBox.Show("Setting saved!");
         }
+        public static bool changesetting;
     }
 }

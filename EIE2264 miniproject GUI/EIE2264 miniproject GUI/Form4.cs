@@ -25,44 +25,29 @@ namespace EIE2264_miniproject_GUI
                Properties.Resources._8,
                Properties.Resources._9,
            };
-        
-        Point[] OrgLoc = new Point[4];
-        
-        int TotalScore = 0;
-        int CurScore = 0;
-        int CurRound = -1;
 
         void ResetAll()
         {
             timer1.Stop();
-            CurScore = 0;
+            collection.CurScore = 0;
 
-            r2c1.Enabled = true;
-            r2c1.Visible = true;
-            r2c1.Location = OrgLoc[0];
-            r2c2.Enabled = true;
-            r2c2.Visible = true;
-            r2c2.Location = OrgLoc[1];
-            r2c3.Enabled = true;
-            r2c3.Visible = true;
-            r2c3.Location = OrgLoc[2];
-            r2c4.Enabled = true;
-            r2c4.Visible = true;
-            r2c4.Location = OrgLoc[3];
-            a_10.Tag = null;
+            for (int i = 0; i < 4; i++)
+            {
+                collection.MathAnswer[i].Location = collection.OrgLoc[i];
+            }
+            a_10.Tag = "";
             a_10.Image = null;
 
-            c_10.Tag = null;
+            c_10.Tag = "";
             c_10.Image = null;
-            Ans.Image = null;
-            Ans.Tag = "";
+            Ans.Tag = null;
         }
 
         void setquestion()
         {
             ResetAll();
 
-            CurRound++;
+            collection.CurRound++;
             int a = (collection.dllGetRandomNumber() % 9) + 1;
             int b;
             do
@@ -108,14 +93,14 @@ namespace EIE2264_miniproject_GUI
                 r1c1_cheat.Visible = false;
             }
 
-            if(method == 2||method == 3)
+            if (method == 2 || method == 3)
             {
                 int temp = c;
                 c = a;
                 a = temp;
             }
 
-            if(a > 9)
+            if (a > 9)
             {
                 a_10.Image = MathChar[a / 10];
                 a_10.Tag = a / 10;
@@ -140,122 +125,28 @@ namespace EIE2264_miniproject_GUI
             }
         }
 
-        bool verifyans()
+        void endgame()
         {
-            int a;
-            if (a_10.Tag == null)
-            {
-                a = Int32.Parse(a_1.Tag.ToString());
-            }
-            else
-            {
-                a = Int32.Parse(a_10.Tag.ToString() + a_1.Tag.ToString());
-            }
-            int b = Int32.Parse(IntB.Tag.ToString());
-            int c;
-            if (c_10.Tag == null)
-            {
-               c = Int32.Parse(c_1.Tag.ToString());
-            }
-            else
-            {
-                c = Int32.Parse(c_10.Tag.ToString() + c_1.Tag.ToString());
-            }
-            if (Ans.Tag.ToString() == "ADD")
-            {
-                if(a+b == c)
-                {
-                    return true;
-                }
-            }
-            if (Ans.Tag.ToString() == "DIV")
-            {
-                if(b == 0)
-                {
-                    return false;
-                }
-                if(a/b == c && a%b == 0)
-                {
-                    return true;
-                }
-            }
-            if (Ans.Tag.ToString() == "MUL")
-            {
-                if(a*b == c)
-                {
-                    return true;
-                }
-            }
-            if (Ans.Tag.ToString() == "SUB")
-            {
-                if(a-b == c)
-                {
-                    return true;
-                }
-            }
-            return false;
+            timer1.Stop();
+            MessageBox.Show("Total Score: " + collection.TotalScore.ToString());
+            collection.dllUpdateHighScore(collection.TotalScore);
+            this.Close();
         }
 
         void CheckCorrect()
         {
-            if (Ans.Tag.ToString() != "")
+            switch (collection.CheckCorrect(3, mode))
             {
-                if (verifyans())
-                {
-                    if(collection.settings[4,1] == 0)
-                    {
-                        if (mode == 0)
-                        {
-                            TotalScore += collection.settings[4, 0];
-                        }
-                        if (mode == 1)
-                        {
-                            TotalScore += CurScore;
-                        }
-                        if (mode == 2)
-                        {
-                            setquestion();
-                        }
-                    }
-                    else
-                    {
-                        if (mode == 0)
-                        {
-                            TotalScore += collection.settings[4, 0];
-                        }
-                        if (mode == 1)
-                        {
-                            TotalScore += CurScore;
-                        }
-                        setquestion();
-                    }
-                }
-                else
-                {
-                    if (mode == 0 && collection.settings[4, 1] == 0)
-                    {
-                        timer1.Stop();
-                        MessageBox.Show("Total Score: " + TotalScore.ToString());
-                        collection.dllUpdateHighScore(TotalScore);
-                        this.Close();
-                    }
-                }
-                if (CurRound + 1 == collection.settings[5,0] && mode == 1)
-                {
-                    timer1.Stop();
-                    MessageBox.Show("Total Score: " + TotalScore.ToString());
-                    collection.dllUpdateHighScore(TotalScore);
-                    this.Close();
-                }
-                if (mode != 2 && collection.settings[4,1] == 0)
-                {
+                case 1:
                     setquestion();
-                }
+                    break;
+                case 2:
+                    endgame();
+                    break;
             }
         }
 
         private bool press;
-        private Size halfsize;
         int mode;//0=time 1=score
         bool cheat;
         public Form4(int Mode, bool cheatmode)
@@ -264,33 +155,42 @@ namespace EIE2264_miniproject_GUI
             mode = Mode;
             cheat = cheatmode;
             Size = GetPreferredSize(Size);
-            halfsize = new Size(Ans.Size.Width / 2, Ans.Size.Height / 2);
+            collection.halfsize = new Size(Ans.Size.Width / 2, Ans.Size.Height / 2);
             timer1.Stop();
-            OrgLoc[0] = r2c1.Location;
-            OrgLoc[1] = r2c2.Location;
-            OrgLoc[2] = r2c3.Location;
-            OrgLoc[3] = r2c4.Location;
+            collection.MathAnswer = new PictureBox[4]
+            {
+                r2c1,r2c2,r2c3,r2c4
+            };
+            collection.MathQuestion = new PictureBox[6]
+            {
+                a_10,a_1,Ans,IntB,c_10,c_1
+            };
+            for (int i = 0; i < 4; i++)
+            {
+                collection.OrgLoc[i] = collection.MathAnswer[i].Location;
+            }
+            collection.TotalScore = 0;
+            collection.CurScore = 0;
+            collection.CurRound = -1;
             setquestion();
         }
 
         void MouseMovehandler(PictureBox Picturebox)
         {
-            Picturebox.Location = Point.Subtract(PointToClient(MousePosition), halfsize);
+            Picturebox.Location = Point.Subtract(PointToClient(MousePosition), collection.halfsize);
         }
 
         bool MouseUphandler(PictureBox Picturebox)
         {
-            if ((Picturebox.Location.X + halfsize.Width) >= Ans.Location.X &&
-       (Picturebox.Location.X + halfsize.Width) <= (Ans.Location.X + Ans.Size.Width) &&
-       (Picturebox.Location.Y + halfsize.Height) >= Ans.Location.Y &&
-        (Picturebox.Location.Y + halfsize.Height) <= (Ans.Location.Y + Ans.Size.Height))
+            if (collection.MouseUphandler(Picturebox,3))
             {
-                Picturebox.Location = Ans.Location;
-                Ans.Tag = Picturebox.Tag;
+                return true;
+            }
+            else
+            {
                 CheckCorrect();
                 return false;
             }
-            return true;
         }
 
         private void r2c4_MouseDown(object sender, MouseEventArgs e)
@@ -301,20 +201,17 @@ namespace EIE2264_miniproject_GUI
         {
             if (press)
             {
-                PictureBox Picturebox = (PictureBox)sender;
-                MouseMovehandler(Picturebox);
+                MouseMovehandler((PictureBox)sender);
             }
         }
         private void r2c4_MouseUp(object sender, MouseEventArgs e)
         {
-            PictureBox Picturebox = (PictureBox)sender;
             press = false;
-            if (MouseUphandler(Picturebox))
+            if (MouseUphandler((PictureBox)sender))
             {
-                r2c4.Location = OrgLoc[3];
+                r2c4.Location = collection.OrgLoc[3];
             }
         }
-
 
         private void r2c3_MouseDown(object sender, MouseEventArgs e)
         {
@@ -324,8 +221,7 @@ namespace EIE2264_miniproject_GUI
         {
             if (press)
             {
-                PictureBox Picturebox = (PictureBox)sender;
-                MouseMovehandler(Picturebox);
+                MouseMovehandler((PictureBox)sender);
             }
         }
         private void r2c3_MouseUp(object sender, MouseEventArgs e)
@@ -334,10 +230,9 @@ namespace EIE2264_miniproject_GUI
             press = false;
             if (MouseUphandler(Picturebox))
             {
-                r2c3.Location = OrgLoc[2];
+                r2c3.Location = collection.OrgLoc[2];
             }
         }
-
 
         private void r2c2_MouseDown(object sender, MouseEventArgs e)
         {
@@ -347,21 +242,17 @@ namespace EIE2264_miniproject_GUI
         {
             if (press)
             {
-                PictureBox Picturebox = (PictureBox)sender;
-                MouseMovehandler(Picturebox);
+                MouseMovehandler((PictureBox)sender);
             }
         }
         private void r2c2_MouseUp(object sender, MouseEventArgs e)
         {
-            PictureBox Picturebox = (PictureBox)sender;
             press = false;
-            if (MouseUphandler(Picturebox))
+            if (MouseUphandler((PictureBox)sender))
             {
-                r2c2.Location = OrgLoc[1];
+                r2c2.Location = collection.OrgLoc[1];
             }
         }
-
-
 
         private void r2c1_MouseDown(object sender, MouseEventArgs e)
         {
@@ -371,53 +262,27 @@ namespace EIE2264_miniproject_GUI
         {
             if (press)
             {
-                PictureBox Picturebox = (PictureBox)sender;
-                MouseMovehandler(Picturebox);
+                MouseMovehandler((PictureBox)sender);
             }
         }
         private void r2c1_MouseUp(object sender, MouseEventArgs e)
         {
-            PictureBox Picturebox = (PictureBox)sender;
             press = false;
-            if (MouseUphandler(Picturebox))
+            if (MouseUphandler((PictureBox)sender))
             {
-                r2c1.Location = OrgLoc[0];
+                r2c1.Location = collection.OrgLoc[0];
             }
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            CurScore++;
-            TimeDisplay.Text = "Time passed: " + CurScore.ToString();
+            collection.CurScore++;
+            TimeDisplay.Text = "Time passed: " + collection.CurScore.ToString();
             if (mode == 0)
             {
-                if (CurRound > collection.settings[0, 0] && CurScore > collection.settings[0, 1])
+                if (collection.DetEndForMode0())
                 {
-                    timer1.Stop();
-                    MessageBox.Show("Total Score: " + TotalScore.ToString());
-                    collection.dllUpdateHighScore(TotalScore);
-                    this.Close();
-                }
-                if (CurRound > collection.settings[1, 0] && CurScore > collection.settings[1, 1])
-                {
-                    timer1.Stop();
-                    MessageBox.Show("Total Score: " + TotalScore.ToString());
-                    collection.dllUpdateHighScore(TotalScore);
-                    this.Close();
-                }
-                if (CurRound > collection.settings[2, 0] && CurScore > collection.settings[2, 1])
-                {
-                    timer1.Stop();
-                    MessageBox.Show("Total Score: " + TotalScore.ToString());
-                    collection.dllUpdateHighScore(TotalScore);
-                    this.Close();
-                }
-                if (CurRound > collection.settings[3, 0] && CurScore > collection.settings[3, 1])
-                {
-                    timer1.Stop();
-                    MessageBox.Show("Total Score: " + TotalScore.ToString());
-                    collection.dllUpdateHighScore(TotalScore);
-                    this.Close();
+                    endgame();
                 }
             }
         }

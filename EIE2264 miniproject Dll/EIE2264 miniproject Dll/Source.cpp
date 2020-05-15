@@ -128,8 +128,19 @@ void WriteCountryToAns() {
 	fileout.close();
 }
 
-void WriteEngToAns() {
-	ifstream filein("EngDict.dat", ios::ate | ios::binary);
+void WriteEngToAns(int diff) {
+	string dict;
+	switch (diff)
+	{
+	case 1:
+		dict = "InterEngDict.dat";
+	case 2:
+		dict = "HardEngDict.dat";
+	default:
+		dict = "EasyEngDict.dat";
+		break;
+	}
+	ifstream filein(dict, ios::ate | ios::binary);
 	filein.seekg(GetRandomNumber() % (filein.tellg() / sizeof(EngWord)) * sizeof(EngWord));
 	EngWord* Eng = new EngWord;
 	filein.read(reinterpret_cast<char*>(Eng), sizeof(EngWord));
@@ -157,7 +168,7 @@ int ChkCountry() {
 }
 
 int ChkEng() {
-	ifstream filein("EngDict.dat", ios::beg | ios::binary);
+	ifstream filein("HardEngDict.dat", ios::beg | ios::binary);
 	char* UserAns = readUserAnswer();
 	char* newChar = new char;
 	EngWord* Eng = new EngWord;
@@ -251,8 +262,8 @@ extern "C"
 	__declspec(dllexport) int __stdcall dllChkEng() {
 		return ChkEng();
 	}
-	__declspec(dllexport) void __stdcall dllWriteEngToAns() {
-		WriteEngToAns();
+	__declspec(dllexport) void __stdcall dllWriteEngToAns(int diff) {
+		WriteEngToAns(diff);
 	}
 	__declspec(dllexport) void __stdcall dllSort() {
 		Sort();

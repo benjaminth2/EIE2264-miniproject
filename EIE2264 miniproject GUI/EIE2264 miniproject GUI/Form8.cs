@@ -20,6 +20,7 @@ namespace EIE2264_miniproject_GUI
             button3.Visible = cheatmode;
             UpdateToggleButton();
             FetchSettings();
+            Form2.changesetting = false;
         }
 
         void FetchSettings()
@@ -39,8 +40,12 @@ namespace EIE2264_miniproject_GUI
 
         void UpdateToggleButton()
         {
+            Form2.changesetting = true;
             allow.Enabled = false;
             deny.Enabled = false;
+            button1.Enabled = true;
+            button2.Enabled = true;
+            button3.Enabled = true;
             if (collection.settings[4, 1] == 0)
             {
                 allow.Enabled = true;
@@ -48,6 +53,18 @@ namespace EIE2264_miniproject_GUI
             else
             {
                 deny.Enabled = true;
+            }
+            switch(collection.settings[5, 1])
+            {
+                case 0:
+                    button1.Enabled = false;
+                    break;
+                case 1:
+                    button2.Enabled = false;
+                    break;
+                case 2:
+                    button3.Enabled = false;
+                    break;
             }
         }
 
@@ -65,6 +82,7 @@ namespace EIE2264_miniproject_GUI
 
         private void button4_Click(object sender, EventArgs e)
         {
+            Form2.changesetting = true;
             TextBox[] textBox = new TextBox[10] 
             {
                 textBox1, textBox3, textBox5, textBox7,
@@ -147,6 +165,24 @@ namespace EIE2264_miniproject_GUI
             }
             collection.dllEditHighScore(score);
             MessageBox.Show("Highscore of " + collection.ReadFromTempText() + " is changed to " + score.ToString());
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            collection.settings[5, 1] = 2;
+            UpdateToggleButton();
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            collection.settings[5, 1] = 0;
+            UpdateToggleButton();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            collection.settings[5, 1] = 1;
+            UpdateToggleButton();
         }
     }
 }
