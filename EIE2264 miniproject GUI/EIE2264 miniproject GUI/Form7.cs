@@ -31,7 +31,8 @@ namespace EIE2264_miniproject_GUI
 
         void refreshscreen()
         {
-            if(a + 10 > totalRecord)
+            collection.dllSort();
+            if (a + 10 > totalRecord)
             {
                 b = totalRecord;
             }

@@ -83,9 +83,9 @@
             this.r2c4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.r2c4.TabIndex = 29;
             this.r2c4.TabStop = false;
-            this.r2c4.MouseDown += new System.Windows.Forms.MouseEventHandler(this.r2c4_MouseDown);
-            this.r2c4.MouseMove += new System.Windows.Forms.MouseEventHandler(this.r2c4_MouseMove);
-            this.r2c4.MouseUp += new System.Windows.Forms.MouseEventHandler(this.r2c4_MouseUp);
+            this.r2c4.MouseDown += new System.Windows.Forms.MouseEventHandler(this.CustomMouseDown);
+            this.r2c4.MouseMove += new System.Windows.Forms.MouseEventHandler(this.CustomMouseMove);
+            this.r2c4.MouseUp += new System.Windows.Forms.MouseEventHandler(this.CustomMouseUp);
             // 
             // r2c3
             // 
@@ -95,9 +95,9 @@
             this.r2c3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.r2c3.TabIndex = 28;
             this.r2c3.TabStop = false;
-            this.r2c3.MouseDown += new System.Windows.Forms.MouseEventHandler(this.r2c3_MouseDown);
-            this.r2c3.MouseMove += new System.Windows.Forms.MouseEventHandler(this.r2c3_MouseMove);
-            this.r2c3.MouseUp += new System.Windows.Forms.MouseEventHandler(this.r2c3_MouseUp);
+            this.r2c3.MouseDown += new System.Windows.Forms.MouseEventHandler(this.CustomMouseDown);
+            this.r2c3.MouseMove += new System.Windows.Forms.MouseEventHandler(this.CustomMouseMove);
+            this.r2c3.MouseUp += new System.Windows.Forms.MouseEventHandler(this.CustomMouseUp);
             // 
             // r2c2
             // 
@@ -107,9 +107,9 @@
             this.r2c2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.r2c2.TabIndex = 27;
             this.r2c2.TabStop = false;
-            this.r2c2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.r2c2_MouseDown);
-            this.r2c2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.r2c2_MouseMove);
-            this.r2c2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.r2c2_MouseUp);
+            this.r2c2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.CustomMouseDown);
+            this.r2c2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.CustomMouseMove);
+            this.r2c2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.CustomMouseUp);
             // 
             // r2c1
             // 
@@ -119,9 +119,9 @@
             this.r2c1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.r2c1.TabIndex = 26;
             this.r2c1.TabStop = false;
-            this.r2c1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.r2c1_MouseDown);
-            this.r2c1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.r2c1_MouseMove);
-            this.r2c1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.r2c1_MouseUp);
+            this.r2c1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.CustomMouseDown);
+            this.r2c1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.CustomMouseMove);
+            this.r2c1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.CustomMouseUp);
             // 
             // r1c4_cheat
             // 

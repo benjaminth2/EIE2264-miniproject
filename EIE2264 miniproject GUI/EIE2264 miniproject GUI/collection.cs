@@ -109,9 +109,9 @@ namespace EIE2264_miniproject_GUI
                 for (int i = 0; i < 2; i++)
                 {
                     if ((Picturebox.Location.X + halfsize.Width) >= SpaceToFill[i].Location.X &&
-                        (Picturebox.Location.X + halfsize.Width) <= (SpaceToFill[i].Location.X + collection.SpaceToFill[i].Width) &&
+                        (Picturebox.Location.X + halfsize.Width) <= (SpaceToFill[i].Location.X + SpaceToFill[i].Width) &&
                         (Picturebox.Location.Y + halfsize.Height) >= SpaceToFill[i].Location.Y &&
-                        (Picturebox.Location.Y + halfsize.Height) <= (SpaceToFill[i].Location.Y + collection.SpaceToFill[i].Height))
+                        (Picturebox.Location.Y + halfsize.Height) <= (SpaceToFill[i].Location.Y + SpaceToFill[i].Height))
                     {
                         Picturebox.Location = SpaceToFill[i].Location;
                         for(int j = 0;j < 4; j++)
@@ -130,7 +130,7 @@ namespace EIE2264_miniproject_GUI
                                 }
                             }
                         }
-                        return false;
+                        return true;
                     }
                 }
             }
@@ -158,10 +158,30 @@ namespace EIE2264_miniproject_GUI
                             }
                         }
                     }
-                    return false;
+                    return true;
                 }
             }
-            return true;
+            if (game != 3)
+            {
+                for (int k = 0; k < 4; k++)
+                {
+                    if (Picturebox == pictureBoxes[1, k])
+                    {
+                        Picturebox.Location = OrgLoc[k];
+                    }
+                }
+            }
+            else
+            {
+                for (int k = 0; k < 4; k++)
+                {
+                    if (Picturebox == MathAnswer[k])
+                    {
+                        Picturebox.Location = OrgLoc[k];
+                    }
+                }
+            }
+            return false;
         }
 
         public static bool DetEndForMode0()

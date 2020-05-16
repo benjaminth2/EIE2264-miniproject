@@ -105,7 +105,7 @@ namespace EIE2264_miniproject_GUI
                 {
                     if(setting[i] < 0)
                     {
-                        MessageBox.Show("All input should be a positive integer", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("All input should be a non negative integer", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
                     switch (i)
@@ -130,12 +130,12 @@ namespace EIE2264_miniproject_GUI
 
             if (setting[8] < 1)
             {
-                MessageBox.Show("Score add should be a non zero positive integer", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Score add should be a non negative integer", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             if (setting[9] < 1)
             {
-                MessageBox.Show("Number of round should be a non zero positive integer", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Number of round should be a non negative integer", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             collection.settings[3, 0] = setting[0];
@@ -161,7 +161,7 @@ namespace EIE2264_miniproject_GUI
             }
             if (score < 0)
             {
-                MessageBox.Show("Highscore should be a positive integer", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Highscore should be a non-negative integer", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             collection.dllEditHighScore(score);

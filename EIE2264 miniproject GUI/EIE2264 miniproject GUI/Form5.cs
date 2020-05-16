@@ -195,105 +195,27 @@ namespace EIE2264_miniproject_GUI
             }
         }
 
-        void MouseMovehandler(PictureBox Picturebox)
+        private void CustomMouseDown(object sender, MouseEventArgs e)
         {
-            Picturebox.Location = Point.Subtract(PointToClient(MousePosition), collection.halfsize);
+            press = true;
         }
-        
-        bool MouseUphandler(PictureBox Picturebox)
+
+        private void CustomMouseMove(object sender, MouseEventArgs e)
         {
-            if (collection.MouseUphandler(Picturebox,1))
+            if (press)
             {
-                return true;
+                ((PictureBox)sender).Location = Point.Subtract(PointToClient(MousePosition), collection.halfsize);
             }
-            else
+        }
+        private void CustomMouseUp(object sender, MouseEventArgs e)
+        {
+            press = false;
+            if (collection.MouseUphandler((PictureBox)sender, 1))
             {
                 CheckCorrect();
-                return false;
             }
         }
 
-        private void r2c4_MouseDown(object sender, MouseEventArgs e)
-        {
-            press = true;
-        }
-        private void r2c4_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (press)
-            {
-                MouseMovehandler((PictureBox)sender);
-            }
-        }
-        private void r2c4_MouseUp(object sender, MouseEventArgs e)
-        {
-            press = false;
-            if (MouseUphandler((PictureBox)sender))
-            {
-                r2c4.Location = collection.OrgLoc[3];
-            }
-        }
-
-        private void r2c3_MouseDown(object sender, MouseEventArgs e)
-        {
-            press = true;
-        }
-        private void r2c3_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (press)
-            {
-                MouseMovehandler((PictureBox)sender);
-            }
-        }
-        private void r2c3_MouseUp(object sender, MouseEventArgs e)
-        {
-            PictureBox Picturebox = (PictureBox)sender;
-            press = false;
-            if (MouseUphandler(Picturebox))
-            {
-                r2c3.Location = collection.OrgLoc[2];
-            }
-        }
-
-        private void r2c2_MouseDown(object sender, MouseEventArgs e)
-        {
-            press = true;
-        }
-        private void r2c2_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (press)
-            {
-                MouseMovehandler((PictureBox)sender);
-            }
-        }
-        private void r2c2_MouseUp(object sender, MouseEventArgs e)
-        {
-            press = false;
-            if (MouseUphandler((PictureBox)sender))
-            {
-                r2c2.Location = collection.OrgLoc[1];
-            }
-        }
-
-        private void r2c1_MouseDown(object sender, MouseEventArgs e)
-        {
-            press = true;
-        }
-        private void r2c1_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (press)
-            {
-                MouseMovehandler((PictureBox)sender);
-            }
-        }
-        private void r2c1_MouseUp(object sender, MouseEventArgs e)
-        {
-            press = false;
-            if (MouseUphandler((PictureBox)sender))
-            {
-                r2c1.Location = collection.OrgLoc[0];
-            }
-        }
-        
         private void FormClosing_event(object sender, System.ComponentModel.CancelEventArgs e)
         {
             timer1.Stop();
