@@ -183,7 +183,17 @@ namespace EIE2264_miniproject_GUI
         void endgame()
         {
             timer1.Stop();
-            MessageBox.Show("Total Score: " + collection.TotalScore.ToString());
+            string promptstr = "";
+            switch (mode)
+            {
+                case 1:
+                    promptstr = "Total Score: " + collection.TotalScore.ToString();
+                    break;
+                case 0:
+                    promptstr = "Total Round: " + ((collection.TotalScore / collection.settings[4, 0]) + 1 ).ToString();
+                    break;
+            }
+            MessageBox.Show(promptstr);
             collection.dllUpdateHighScore(collection.TotalScore);
             this.Close();
         }

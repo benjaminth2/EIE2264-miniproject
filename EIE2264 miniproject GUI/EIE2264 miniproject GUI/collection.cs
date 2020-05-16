@@ -313,6 +313,10 @@ namespace EIE2264_miniproject_GUI
                             case 0:
                                 return 2;
                             case 1:
+                                if (CurRound + 1 == settings[5, 0])
+                                {
+                                    return 2;
+                                }
                                 return 1;
                         }
                     }

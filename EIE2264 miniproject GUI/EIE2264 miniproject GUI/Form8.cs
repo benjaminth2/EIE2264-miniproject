@@ -92,11 +92,12 @@ namespace EIE2264_miniproject_GUI
             int[] setting = new int[10];
             for(int i = 0;i < 10; i++)
             {
-                if (!(Int32.TryParse(textBox[i].Text,out setting[i])))
+                if (!(int.TryParse(textBox[i].Text,out setting[i])))
                 {
                     MessageBox.Show("All input should be an integer", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
+                setting[i] = int.Parse(textBox[i].Text);
             }
             for(int i = 0;i < 2; i++)
             {
@@ -110,14 +111,14 @@ namespace EIE2264_miniproject_GUI
                     switch (i)
                     {
                         case 0:
-                            if(setting[i] >= setting[i + 1])
+                            if(setting[j] >= setting[j + 1])
                             {
                                 MessageBox.Show("Trigger in round should increasesd in each tier", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 return;
                             }
                             break;
                         case 1:
-                            if (setting[i+4] < setting[i + 5])
+                            if (setting[j+4] < setting[j + 5])
                             {
                                 MessageBox.Show("Time allow in round should decrease in each tier", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 return;
@@ -147,7 +148,7 @@ namespace EIE2264_miniproject_GUI
             collection.settings[0, 1] = setting[7];
             collection.settings[4, 0] = setting[8];
             collection.settings[5, 0] = setting[9];
-            this.Close();
+            Close();
         }
 
         private void button3_Click(object sender, EventArgs e)
