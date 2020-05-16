@@ -29,7 +29,7 @@ namespace EIE2264_miniproject_GUI
         void ResetAll()
         {
             timer1.Stop();
-            collection.CurScore = 0;
+            collection.CurTime = 0;
 
             for (int i = 0; i < 4; i++)
             {
@@ -170,7 +170,7 @@ namespace EIE2264_miniproject_GUI
                 collection.OrgLoc[i] = collection.MathAnswer[i].Location;
             }
             collection.TotalScore = 0;
-            collection.CurScore = 0;
+            collection.CurTime = 0;
             collection.CurRound = -1;
             setquestion();
         }
@@ -276,8 +276,8 @@ namespace EIE2264_miniproject_GUI
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            collection.CurScore++;
-            TimeDisplay.Text = "Time passed: " + collection.CurScore.ToString();
+            collection.CurTime++;
+            TimeDisplay.Text = "Time passed: " + collection.CurTime.ToString();
             if (mode == 0)
             {
                 if (collection.DetEndForMode0())
@@ -290,6 +290,7 @@ namespace EIE2264_miniproject_GUI
         private void button1_Click(object sender, EventArgs e)
         {
             collection.CurRound--;
+            collection.CurTime = 0;
             setquestion();
         }
     }

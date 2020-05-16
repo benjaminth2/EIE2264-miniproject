@@ -45,7 +45,7 @@ namespace EIE2264_miniproject_GUI
             deny.Enabled = false;
             button1.Enabled = true;
             button2.Enabled = true;
-            button3.Enabled = true;
+            button5.Enabled = true;
             if (collection.settings[4, 1] == 0)
             {
                 allow.Enabled = true;
@@ -60,10 +60,10 @@ namespace EIE2264_miniproject_GUI
                     button1.Enabled = false;
                     break;
                 case 1:
-                    button2.Enabled = false;
+                    button5.Enabled = false;
                     break;
                 case 2:
-                    button3.Enabled = false;
+                    button2.Enabled = false;
                     break;
             }
         }

@@ -13,7 +13,7 @@ namespace EIE2264_miniproject_GUI
     public partial class Form2 : Form
     {
 
-        public int act;
+        public static int act;
         public Form2()
         {
             InitializeComponent();

@@ -16,12 +16,14 @@ namespace EIE2264_miniproject_GUI
         public Form1()
         {
             InitializeComponent();
-            this.Size = this.GetPreferredSize(this.Size);
+            Form2.act = 0;
+            Size = GetPreferredSize(Size);
         }
         public bool Form1Execute = false;
         private void button1_Click(object sender, EventArgs e)
         {
-            if (textBox1.Text != "")
+            
+            if (textBox1.Text != "" && textBox1.Text.ToCharArray()[0] != ' ')
             {
                 
                 collection.WriteToTempText(textBox1.Text);
@@ -35,7 +37,7 @@ namespace EIE2264_miniproject_GUI
                 Form1Execute = true;
                 this.Close();
             }
-            MessageBox.Show("Username cannot empty!", "Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+            MessageBox.Show("Invalid username!", "Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
         }
     }
 }

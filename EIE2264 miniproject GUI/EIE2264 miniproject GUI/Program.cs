@@ -28,7 +28,7 @@ namespace EIE2264_miniproject_GUI
                     form2 = new Form2();
                     Application.Run(form2);
                 }
-            } while (form2.act == 1);
+            } while (Form2.act == 1);
         }
     }
 }

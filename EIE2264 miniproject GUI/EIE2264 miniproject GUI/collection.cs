@@ -62,15 +62,7 @@ namespace EIE2264_miniproject_GUI
 
         public static string ReadFromAnswer(int mode)
         {
-            switch (mode)
-            {
-                case 0:
-                    dllWriteEngToAns(settings[5,1]);
-                    break;
-                case 1:
-                    dllWriteCountryToAns();
-                    break;
-            }
+            dllWriteEngToAns(settings[5, 1]);
             string Text;
             StreamReader sr = new StreamReader("ans.txt");
             Text = sr.ReadLine();
@@ -95,7 +87,7 @@ namespace EIE2264_miniproject_GUI
         public static Point[] OrgLoc = new Point[4];
         public static Size halfsize;
         public static PictureBox[,] pictureBoxes;
-        public static int TotalScore, CurScore, CurRound;
+        public static int TotalScore, CurTime, CurRound;
 
         public static PictureBox[] MathQuestion;
         public static PictureBox[] MathAnswer;
@@ -113,6 +105,22 @@ namespace EIE2264_miniproject_GUI
                         (Picturebox.Location.Y + halfsize.Height) <= (SpaceToFill[i].Location.Y + collection.SpaceToFill[i].Height))
                     {
                         Picturebox.Location = SpaceToFill[i].Location;
+                        for(int j = 0;j < 4; j++)
+                        {
+                            if(Picturebox != pictureBoxes[1, j])
+                            {
+                                if (Picturebox.Location == pictureBoxes[1, j].Location)
+                                {
+                                    for (int k = 0; k < 4; k++)
+                                    {
+                                        if (Picturebox == pictureBoxes[1, k])
+                                        {
+                                            Picturebox.Location = OrgLoc[k];
+                                        }
+                                    }
+                                }
+                            }
+                        }
                         return false;
                     }
                 }
@@ -120,11 +128,27 @@ namespace EIE2264_miniproject_GUI
             else
             {
                 if ((Picturebox.Location.X + halfsize.Width) >= MathQuestion[2].Location.X &&
-                    (Picturebox.Location.X + halfsize.Width) <= (MathQuestion[2].Location.X + collection.MathQuestion[2].Width) &&
+                    (Picturebox.Location.X + halfsize.Width) <= (MathQuestion[2].Location.X + MathQuestion[2].Width) &&
                     (Picturebox.Location.Y + halfsize.Height) >= MathQuestion[2].Location.Y &&
-                    (Picturebox.Location.Y + halfsize.Height) <= (MathQuestion[2].Location.Y + collection.MathQuestion[2].Height))
+                    (Picturebox.Location.Y + halfsize.Height) <= (MathQuestion[2].Location.Y + MathQuestion[2].Height))
                 {
                     Picturebox.Location = MathQuestion[2].Location;
+                    for (int j = 0; j < 4; j++)
+                    {
+                        if (Picturebox != MathAnswer[j])
+                        {
+                            if (Picturebox.Location == MathAnswer[j].Location)
+                            {
+                                for(int k = 0;k < 4; k++)
+                                {
+                                    if(Picturebox == MathAnswer[k])
+                                    {
+                                        Picturebox.Location = OrgLoc[k];
+                                    }
+                                }
+                            }
+                        }
+                    }
                     return false;
                 }
             }
@@ -133,10 +157,10 @@ namespace EIE2264_miniproject_GUI
 
         public static bool DetEndForMode0()
         {
-            if ((CurRound > settings[3, 0] && CurScore > settings[3, 1]) ||
-                (CurRound > settings[2, 0] && CurScore > settings[2, 1]) ||
-                (CurRound > settings[1, 0] && CurScore > settings[1, 1]) ||
-                (CurRound > settings[0, 0] && CurScore > settings[0, 1]))
+            if ((CurRound > settings[3, 0] && CurTime > settings[3, 1]) ||
+                (CurRound > settings[2, 0] && CurTime > settings[2, 1]) ||
+                (CurRound > settings[1, 0] && CurTime > settings[1, 1]) ||
+                (CurRound > settings[0, 0] && CurTime > settings[0, 1]))
             {
                 return true;
             }
@@ -271,7 +295,7 @@ namespace EIE2264_miniproject_GUI
                             TotalScore += settings[4, 0];
                             break;
                         case 1:
-                            TotalScore += CurScore;
+                            TotalScore += CurTime;
                             if (CurRound + 1 == settings[5, 0])
                             {
                                 return 2;
@@ -282,7 +306,7 @@ namespace EIE2264_miniproject_GUI
                 }
                 else
                 {
-                    if (settings[5, 0] == 0 && mode != 2)
+                    if (settings[4, 1] == 0 && mode != 2)
                     {
                         switch (mode)
                         {
