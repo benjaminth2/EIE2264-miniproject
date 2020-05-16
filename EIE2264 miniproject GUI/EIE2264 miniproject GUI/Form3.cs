@@ -347,5 +347,11 @@ namespace EIE2264_miniproject_GUI
                 }
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            collection.CurRound--;
+            setquestion();
+        }
     }
 }

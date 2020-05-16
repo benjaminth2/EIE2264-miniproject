@@ -43,6 +43,7 @@
             this.IntB = new System.Windows.Forms.PictureBox();
             this.c_10 = new System.Windows.Forms.PictureBox();
             this.equal = new System.Windows.Forms.PictureBox();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.r1c1_cheat)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.r2c4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.r2c1)).BeginInit();
@@ -204,11 +205,22 @@
             this.equal.TabIndex = 25;
             this.equal.TabStop = false;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(165, 148);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 30;
+            this.button1.Text = "Skip";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form4
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(471, 450);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.r2c4);
             this.Controls.Add(this.r2c1);
             this.Controls.Add(this.r2c3);
@@ -264,5 +276,6 @@
         private System.Windows.Forms.PictureBox c_1;
         private System.Windows.Forms.PictureBox IntB;
         private System.Windows.Forms.PictureBox r1c1_cheat;
+        private System.Windows.Forms.Button button1;
     }
 }
