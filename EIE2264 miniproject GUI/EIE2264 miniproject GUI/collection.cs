@@ -166,10 +166,10 @@ break;
 
         public static bool DetEndForMode0()
         {
-            if ((CurRound > settings[3, 0] && CurTime > settings[3, 1]) ||
-                (CurRound > settings[2, 0] && CurTime > settings[2, 1]) ||
-                (CurRound > settings[1, 0] && CurTime > settings[1, 1]) ||
-                (CurRound > settings[0, 0] && CurTime > settings[0, 1]))
+            if ((CurRound >= settings[3, 0] && CurTime > settings[3, 1]) ||
+                (CurRound >= settings[2, 0] && CurTime > settings[2, 1]) ||
+                (CurRound >= settings[1, 0] && CurTime > settings[1, 1]) ||
+                (CurRound >= settings[0, 0] && CurTime > settings[0, 1]))
             {
                 return true;
             }
