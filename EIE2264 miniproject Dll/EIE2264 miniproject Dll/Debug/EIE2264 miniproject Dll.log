@@ -1,0 +1,3 @@
+﻿  Source.cpp
+c:\users\bc536\source\repos\eie2264 miniproject dll\eie2264 miniproject dll\source.cpp(28): warning C4244: 'return': conversion from 'std::streamoff' to 'int', possible loss of data
+  EIE2264 miniproject Dll.vcxproj -> C:\Users\bc536\source\repos\EIE2264 miniproject Dll\Debug\EIE2264 miniproject Dll.dll
