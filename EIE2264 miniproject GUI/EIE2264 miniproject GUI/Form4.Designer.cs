@@ -257,6 +257,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.equal)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormClosing_event);
 
         }
 

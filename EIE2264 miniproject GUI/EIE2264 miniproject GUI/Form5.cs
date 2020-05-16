@@ -293,6 +293,11 @@ namespace EIE2264_miniproject_GUI
                 r2c1.Location = collection.OrgLoc[0];
             }
         }
+        
+        private void FormClosing_event(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            timer1.Stop();
+        }
 
         private void timer1_Tick(object sender, EventArgs e)
         {

@@ -30,6 +30,9 @@ namespace EIE2264_miniproject_GUI
 
         private void Play_Click(object sender, EventArgs e)
         {
+            collection.TotalScore = 0;
+            collection.CurTime = 0;
+            collection.CurRound = -1;
             TopMost = false;
             Form3 f3;
             Form4 f4;
