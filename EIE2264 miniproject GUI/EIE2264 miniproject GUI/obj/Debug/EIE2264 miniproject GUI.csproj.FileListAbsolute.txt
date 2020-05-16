@@ -48,3 +48,21 @@ C:\Users\Benjamin\Desktop\Git\EIE2264-miniproject\EIE2264 miniproject GUI\EIE226
 C:\Users\Benjamin\Desktop\Git\EIE2264-miniproject\EIE2264 miniproject GUI\EIE2264 miniproject GUI\obj\Debug\EIE2264 miniproject GUI.csproj.CoreCompileInputs.cache
 C:\Users\Benjamin\Desktop\Git\EIE2264-miniproject\EIE2264 miniproject GUI\EIE2264 miniproject GUI\obj\Debug\EIE2264 miniproject GUI.exe
 C:\Users\Benjamin\Desktop\Git\EIE2264-miniproject\EIE2264 miniproject GUI\EIE2264 miniproject GUI\obj\Debug\EIE2264 miniproject GUI.pdb
+C:\Users\bc536\Desktop\EIE2264-miniproject\EIE2264 miniproject GUI\EIE2264 miniproject GUI\bin\Debug\EIE2264 miniproject Dll.dll
+C:\Users\bc536\Desktop\EIE2264-miniproject\EIE2264 miniproject GUI\EIE2264 miniproject GUI\bin\Debug\EIE2264 miniproject GUI.exe.config
+C:\Users\bc536\Desktop\EIE2264-miniproject\EIE2264 miniproject GUI\EIE2264 miniproject GUI\bin\Debug\EIE2264 miniproject GUI.exe
+C:\Users\bc536\Desktop\EIE2264-miniproject\EIE2264 miniproject GUI\EIE2264 miniproject GUI\bin\Debug\EIE2264 miniproject GUI.pdb
+C:\Users\bc536\Desktop\EIE2264-miniproject\EIE2264 miniproject GUI\EIE2264 miniproject GUI\obj\Debug\EIE2264 miniproject GUI.csprojAssemblyReference.cache
+C:\Users\bc536\Desktop\EIE2264-miniproject\EIE2264 miniproject GUI\EIE2264 miniproject GUI\obj\Debug\EIE2264_miniproject_GUI.Form1.resources
+C:\Users\bc536\Desktop\EIE2264-miniproject\EIE2264 miniproject GUI\EIE2264 miniproject GUI\obj\Debug\EIE2264_miniproject_GUI.Form2.resources
+C:\Users\bc536\Desktop\EIE2264-miniproject\EIE2264 miniproject GUI\EIE2264 miniproject GUI\obj\Debug\EIE2264_miniproject_GUI.Form3.resources
+C:\Users\bc536\Desktop\EIE2264-miniproject\EIE2264 miniproject GUI\EIE2264 miniproject GUI\obj\Debug\EIE2264_miniproject_GUI.Form4.resources
+C:\Users\bc536\Desktop\EIE2264-miniproject\EIE2264 miniproject GUI\EIE2264 miniproject GUI\obj\Debug\EIE2264_miniproject_GUI.Form5.resources
+C:\Users\bc536\Desktop\EIE2264-miniproject\EIE2264 miniproject GUI\EIE2264 miniproject GUI\obj\Debug\EIE2264_miniproject_GUI.Form6.resources
+C:\Users\bc536\Desktop\EIE2264-miniproject\EIE2264 miniproject GUI\EIE2264 miniproject GUI\obj\Debug\EIE2264_miniproject_GUI.Form7.resources
+C:\Users\bc536\Desktop\EIE2264-miniproject\EIE2264 miniproject GUI\EIE2264 miniproject GUI\obj\Debug\EIE2264_miniproject_GUI.Form8.resources
+C:\Users\bc536\Desktop\EIE2264-miniproject\EIE2264 miniproject GUI\EIE2264 miniproject GUI\obj\Debug\EIE2264_miniproject_GUI.Properties.Resources.resources
+C:\Users\bc536\Desktop\EIE2264-miniproject\EIE2264 miniproject GUI\EIE2264 miniproject GUI\obj\Debug\EIE2264 miniproject GUI.csproj.GenerateResource.cache
+C:\Users\bc536\Desktop\EIE2264-miniproject\EIE2264 miniproject GUI\EIE2264 miniproject GUI\obj\Debug\EIE2264 miniproject GUI.csproj.CoreCompileInputs.cache
+C:\Users\bc536\Desktop\EIE2264-miniproject\EIE2264 miniproject GUI\EIE2264 miniproject GUI\obj\Debug\EIE2264 miniproject GUI.exe
+C:\Users\bc536\Desktop\EIE2264-miniproject\EIE2264 miniproject GUI\EIE2264 miniproject GUI\obj\Debug\EIE2264 miniproject GUI.pdb

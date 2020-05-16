@@ -62,15 +62,15 @@ namespace EIE2264_miniproject_GUI
 
         public static string ReadFromAnswer(int mode)
         {
-switch(mode){
-case 0:
-dllWriteEngToAns(settings[5, 1]);
-break;
+            switch (mode){
+                case 0:
+                    dllWriteEngToAns(settings[5, 1]);
+                    break;
 
-case 1:
-dllWriteCountryToAns();
-break;
-}
+                case 1:
+                    dllWriteCountryToAns();
+                    break;
+            }
             
             string Text;
             StreamReader sr = new StreamReader("ans.txt");
@@ -166,16 +166,32 @@ break;
 
         public static bool DetEndForMode0()
         {
-            if ((CurRound > settings[3, 0] && CurTime > settings[3, 1]) ||
-                (CurRound > settings[2, 0] && CurTime > settings[2, 1]) ||
-                (CurRound > settings[1, 0] && CurTime > settings[1, 1]) ||
-                (CurRound > settings[0, 0] && CurTime > settings[0, 1]))
+            if ((CurRound >= settings[3, 0] && CurTime > settings[3, 1]) ||
+                (CurRound >= settings[2, 0] && CurTime > settings[2, 1]) ||
+                (CurRound >= settings[1, 0] && CurTime > settings[1, 1]) ||
+                (CurRound >= settings[0, 0] && CurTime > settings[0, 1]))
             {
                 return true;
             }
             return false;
         }
 
+        public static void End(int mode)
+        {
+            string promptstr = "";
+            switch (mode)
+            {
+                case 1:
+                    promptstr = "Total Score: " + TotalScore.ToString();
+                    break;
+                case 0:
+                    promptstr = "Total Round: " + ((TotalScore / settings[4, 0]) + 1).ToString();
+                    break;
+            }
+            MessageBox.Show(promptstr);
+            dllUpdateHighScore(TotalScore);
+        }
+        
         private static bool verifyans(int game)
         {
             switch (game)
