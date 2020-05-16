@@ -62,7 +62,15 @@ namespace EIE2264_miniproject_GUI
 
         public static string ReadFromAnswer(int mode)
         {
-            dllWriteEngToAns(settings[5, 1]);
+switch(mode){
+case 0:
+dllWriteEngToAns(settings[5, 1]);
+break;
+WriteCountryToAns();
+case 1:
+
+}
+            
             string Text;
             StreamReader sr = new StreamReader("ans.txt");
             Text = sr.ReadLine();
